@@ -17,74 +17,6 @@
     "colorHue": 296
   },
   {
-    "id": "01247d628b55",
-    "filename": "s 2018 Bamb Jatt Amrit Maan Jasmine Sandlas Ft. DJ Flow White Hill.mp3",
-    "filePath": "songs/s 2018 Bamb Jatt Amrit Maan Jasmine Sandlas Ft. DJ Flow White Hill.mp3",
-    "url": "songs/s%202018%20Bamb%20Jatt%20Amrit%20Maan%20Jasmine%20Sandlas%20Ft.%20DJ%20Flow%20White%20Hill.mp3",
-    "title": "2018 : Bamb Jatt Amrit Maan Jasmine Sandlas Ft. DJ Flow",
-    "artist": "Audio Vault",
-    "album": "Audio Vault",
-    "sizeBytes": 8358328,
-    "sizeFormatted": "8.0 MB",
-    "extension": "MP3",
-    "categories": [
-      "Punjabi"
-    ],
-    "gradient": "linear-gradient(135deg, hsl(175, 75%, 45%), hsl(246, 80%, 25%))",
-    "colorHue": 175
-  },
-  {
-    "id": "b395c366a6cf",
-    "filename": "Ik Kudi Maahir B Praak 2018.mp3",
-    "filePath": "songs/Ik Kudi Maahir B Praak 2018.mp3",
-    "url": "songs/Ik%20Kudi%20Maahir%20B%20Praak%202018.mp3",
-    "title": "2018 Ik Kudi: Maahir B Praak 2018",
-    "artist": "B Praak",
-    "album": "Audio Vault",
-    "sizeBytes": 8008881,
-    "sizeFormatted": "7.6 MB",
-    "extension": "MP3",
-    "categories": [
-      "Punjabi"
-    ],
-    "gradient": "linear-gradient(135deg, hsl(78, 75%, 45%), hsl(137, 80%, 25%))",
-    "colorHue": 78
-  },
-  {
-    "id": "e173f21a4a51",
-    "filename": "Heer Nav Dolorain ft Ritu Jhass 2021.mp3",
-    "filePath": "songs/Heer Nav Dolorain ft Ritu Jhass 2021.mp3",
-    "url": "songs/Heer%20Nav%20Dolorain%20ft%20Ritu%20Jhass%202021.mp3",
-    "title": "2021 Heer:Nav Dolorain ft Ritu Jhass 2021 New Songs 2021",
-    "artist": "47 Records",
-    "album": "Audio Vault",
-    "sizeBytes": 8334515,
-    "sizeFormatted": "7.9 MB",
-    "extension": "MP3",
-    "categories": [
-      "General"
-    ],
-    "gradient": "linear-gradient(135deg, hsl(3, 75%, 45%), hsl(98, 80%, 25%))",
-    "colorHue": 3
-  },
-  {
-    "id": "06c0132baa9a",
-    "filename": "Why This Kolaveri Di Dhanush, Anirudh.mp3",
-    "filePath": "songs/Why This Kolaveri Di Dhanush, Anirudh.mp3",
-    "url": "songs/Why%20This%20Kolaveri%20Di%20Dhanush%2C%20Anirudh.mp3",
-    "title": "3 - Why This Kolaveri Di Dhanush, Anirudh",
-    "artist": "Sony Music India",
-    "album": "Audio Vault",
-    "sizeBytes": 7947407,
-    "sizeFormatted": "7.6 MB",
-    "extension": "MP3",
-    "categories": [
-      "General"
-    ],
-    "gradient": "linear-gradient(135deg, hsl(74, 75%, 45%), hsl(133, 80%, 25%))",
-    "colorHue": 74
-  },
-  {
     "id": "05c0910a4384",
     "filename": "3 Peg Sharry Mann Mista Baaz Parmish Verma 2016.mp3",
     "filePath": "songs/3 Peg Sharry Mann Mista Baaz Parmish Verma 2016.mp3",
@@ -1811,6 +1743,23 @@
     ],
     "gradient": "linear-gradient(135deg, hsl(161, 75%, 45%), hsl(231, 80%, 25%))",
     "colorHue": 161
+  },
+  {
+    "id": "01247d628b55",
+    "filename": "s 2018 Bamb Jatt Amrit Maan Jasmine Sandlas Ft. DJ Flow White Hill.mp3",
+    "filePath": "songs/s 2018 Bamb Jatt Amrit Maan Jasmine Sandlas Ft. DJ Flow White Hill.mp3",
+    "url": "songs/s%202018%20Bamb%20Jatt%20Amrit%20Maan%20Jasmine%20Sandlas%20Ft.%20DJ%20Flow%20White%20Hill.mp3",
+    "title": "Bamb Jatt Amrit Maan Jasmine Sandlas Ft. DJ Flow",
+    "artist": "Audio Vault",
+    "album": "Audio Vault",
+    "sizeBytes": 8358328,
+    "sizeFormatted": "8.0 MB",
+    "extension": "MP3",
+    "categories": [
+      "Punjabi"
+    ],
+    "gradient": "linear-gradient(135deg, hsl(110, 75%, 45%), hsl(173, 80%, 25%))",
+    "colorHue": 110
   },
   {
     "id": "2ea60c086106",
@@ -5076,6 +5025,23 @@
     "colorHue": 272
   },
   {
+    "id": "e173f21a4a51",
+    "filename": "Heer Nav Dolorain ft Ritu Jhass 2021.mp3",
+    "filePath": "songs/Heer Nav Dolorain ft Ritu Jhass 2021.mp3",
+    "url": "songs/Heer%20Nav%20Dolorain%20ft%20Ritu%20Jhass%202021.mp3",
+    "title": "Heer:Nav Dolorain ft Ritu Jhass 2021 New Songs 2021",
+    "artist": "47 Records",
+    "album": "Audio Vault",
+    "sizeBytes": 8334515,
+    "sizeFormatted": "7.9 MB",
+    "extension": "MP3",
+    "categories": [
+      "General"
+    ],
+    "gradient": "linear-gradient(135deg, hsl(242, 75%, 45%), hsl(323, 80%, 25%))",
+    "colorHue": 242
+  },
+  {
     "id": "85df32c2866a",
     "filename": "High Heels.mp3",
     "filePath": "songs/High Heels.mp3",
@@ -5332,6 +5298,23 @@
     ],
     "gradient": "linear-gradient(135deg, hsl(239, 75%, 45%), hsl(3, 80%, 25%))",
     "colorHue": 239
+  },
+  {
+    "id": "b395c366a6cf",
+    "filename": "Ik Kudi Maahir B Praak 2018.mp3",
+    "filePath": "songs/Ik Kudi Maahir B Praak 2018.mp3",
+    "url": "songs/Ik%20Kudi%20Maahir%20B%20Praak%202018.mp3",
+    "title": "Ik Kudi: Maahir B Praak 2018",
+    "artist": "B Praak",
+    "album": "Audio Vault",
+    "sizeBytes": 8008881,
+    "sizeFormatted": "7.6 MB",
+    "extension": "MP3",
+    "categories": [
+      "Punjabi"
+    ],
+    "gradient": "linear-gradient(135deg, hsl(117, 75%, 45%), hsl(227, 80%, 25%))",
+    "colorHue": 117
   },
   {
     "id": "3d441cefaf2d",
@@ -15108,6 +15091,23 @@
     ],
     "gradient": "linear-gradient(135deg, hsl(266, 75%, 45%), hsl(349, 80%, 25%))",
     "colorHue": 266
+  },
+  {
+    "id": "06c0132baa9a",
+    "filename": "Why This Kolaveri Di Dhanush, Anirudh.mp3",
+    "filePath": "songs/Why This Kolaveri Di Dhanush, Anirudh.mp3",
+    "url": "songs/Why%20This%20Kolaveri%20Di%20Dhanush%2C%20Anirudh.mp3",
+    "title": "Why This Kolaveri Di Dhanush, Anirudh",
+    "artist": "Sony Music India",
+    "album": "Audio Vault",
+    "sizeBytes": 7947407,
+    "sizeFormatted": "7.6 MB",
+    "extension": "MP3",
+    "categories": [
+      "General"
+    ],
+    "gradient": "linear-gradient(135deg, hsl(270, 75%, 45%), hsl(39, 80%, 25%))",
+    "colorHue": 270
   },
   {
     "id": "54ced95bd15f",

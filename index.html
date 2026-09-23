@@ -107,75 +107,77 @@
     <!-- Main Player Stage -->
     <main class="main-content" id="main-content">
       
-      <!-- Top Action Bar -->
-      <header class="top-bar">
-        <button class="btn-icon mobile-menu-toggle" id="btn-mobile-menu" aria-label="Toggle Menu">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-          </svg>
-        </button>
+      <!-- Unified Sticky Navigation Header -->
+      <header class="sticky-nav-header" id="sticky-nav-header">
+        <div class="top-bar">
+          <button class="btn-icon mobile-menu-toggle" id="btn-mobile-menu" aria-label="Toggle Menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
 
-        <div class="search-wrapper">
-          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-          <input type="text" id="search-input" placeholder="Search 919+ songs, artists, or genres..." autocomplete="off">
-          <button class="search-clear hidden" id="search-clear" aria-label="Clear Search">✕</button>
-          <kbd class="search-kbd">/</kbd>
-        </div>
-
-        <div class="top-bar-actions">
-          <!-- Sort Dropdown -->
-          <div class="select-wrapper">
-            <select id="sort-select" aria-label="Sort tracks">
-              <option value="default">Sort: Default (A-Z)</option>
-              <option value="title-desc">Title (Z-A)</option>
-              <option value="artist-asc">Artist (A-Z)</option>
-              <option value="size-desc">Size (Largest)</option>
-              <option value="size-asc">Size (Smallest)</option>
-              <option value="random">Shuffle Order</option>
-            </select>
+          <div class="search-wrapper">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" id="search-input" placeholder="Search 919+ songs, artists, or genres..." autocomplete="off">
+            <button class="search-clear hidden" id="search-clear" aria-label="Clear Search">✕</button>
+            <kbd class="search-kbd">/</kbd>
           </div>
 
-          <!-- View Switcher -->
-          <div class="view-switcher">
-            <button class="btn-icon active" id="btn-view-grid" title="Grid View">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="3" y="3" width="7" height="7"></rect>
-                <rect x="14" y="3" width="7" height="7"></rect>
-                <rect x="14" y="14" width="7" height="7"></rect>
-                <rect x="3" y="14" width="7" height="7"></rect>
-              </svg>
-            </button>
-            <button class="btn-icon" id="btn-view-list" title="List View">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="8" y1="6" x2="21" y2="6"></line>
-                <line x1="8" y1="12" x2="21" y2="12"></line>
-                <line x1="8" y1="18" x2="21" y2="18"></line>
-                <line x1="3" y1="6" x2="3.01" y2="6"></line>
-                <line x1="3" y1="12" x2="3.01" y2="12"></line>
-                <line x1="3" y1="18" x2="3.01" y2="18"></line>
-              </svg>
-            </button>
+          <div class="top-bar-actions">
+            <!-- Sort Dropdown -->
+            <div class="select-wrapper">
+              <select id="sort-select" aria-label="Sort tracks">
+                <option value="default">Sort: Default (A-Z)</option>
+                <option value="title-desc">Title (Z-A)</option>
+                <option value="artist-asc">Artist (A-Z)</option>
+                <option value="size-desc">Size (Largest)</option>
+                <option value="size-asc">Size (Smallest)</option>
+                <option value="random">Shuffle Order</option>
+              </select>
+            </div>
+
+            <!-- View Switcher -->
+            <div class="view-switcher">
+              <button class="btn-icon active" id="btn-view-grid" title="Grid View">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="3" width="7" height="7"></rect>
+                  <rect x="14" y="3" width="7" height="7"></rect>
+                  <rect x="14" y="14" width="7" height="7"></rect>
+                  <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+              </button>
+              <button class="btn-icon" id="btn-view-list" title="List View">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="8" y1="6" x2="21" y2="6"></line>
+                  <line x1="8" y1="12" x2="21" y2="12"></line>
+                  <line x1="8" y1="18" x2="21" y2="18"></line>
+                  <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                  <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                  <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
+
+        <!-- Category Filter Chips -->
+        <nav class="filter-chips-bar" id="category-chips">
+          <button class="filter-chip active" data-category="all">All Tracks</button>
+          <button class="filter-chip" data-category="Punjabi">Punjabi</button>
+          <button class="filter-chip" data-category="Bollywood">Bollywood</button>
+          <button class="filter-chip" data-category="Romantic">Romantic</button>
+          <button class="filter-chip" data-category="Sufi">Sufi & Qawwali</button>
+          <button class="filter-chip" data-category="Devotional">Devotional</button>
+          <button class="filter-chip" data-category="Rap">Rap & Hip-Hop</button>
+          <button class="filter-chip" data-category="Lo-Fi">Lo-Fi & Acoustic</button>
+          <button class="filter-chip" data-category="Poetry">Poetry</button>
+        </nav>
       </header>
-
-      <!-- Category Filter Chips -->
-      <section class="filter-chips-bar" id="category-chips">
-        <button class="filter-chip active" data-category="all">All Tracks</button>
-        <button class="filter-chip" data-category="Punjabi">Punjabi</button>
-        <button class="filter-chip" data-category="Bollywood">Bollywood</button>
-        <button class="filter-chip" data-category="Romantic">Romantic</button>
-        <button class="filter-chip" data-category="Sufi">Sufi & Qawwali</button>
-        <button class="filter-chip" data-category="Devotional">Devotional</button>
-        <button class="filter-chip" data-category="Rap">Rap & Hip-Hop</button>
-        <button class="filter-chip" data-category="Lo-Fi">Lo-Fi & Acoustic</button>
-        <button class="filter-chip" data-category="Poetry">Poetry</button>
-      </section>
 
       <!-- Dynamic Hero Feature Card (Current Playing / Featured) -->
       <section class="hero-banner" id="hero-banner">
@@ -187,10 +189,14 @@
           <p class="hero-artist" id="hero-artist">919 tracks ready from Audio repository</p>
           <div class="hero-controls">
             <button class="btn-hero-play" id="hero-play-btn">
-              <svg viewBox="0 0 24 24" fill="currentColor">
+              <svg class="icon-hero-play" viewBox="0 0 24 24" fill="currentColor">
                 <polygon points="5 3 19 12 5 21 5 3"></polygon>
               </svg>
-              <span>Play Track</span>
+              <svg class="icon-hero-pause hidden" viewBox="0 0 24 24" fill="currentColor">
+                <rect x="6" y="4" width="4" height="16"></rect>
+                <rect x="14" y="4" width="4" height="16"></rect>
+              </svg>
+              <span id="hero-play-text">Play Track</span>
             </button>
             <button class="btn-hero-fav" id="hero-fav-btn" title="Like track">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -494,6 +500,10 @@
 
     <!-- Hidden Native Audio Engine -->
     <audio id="native-audio" preload="metadata" crossorigin="anonymous"></audio>
+
+    <!-- Mobile Backdrops -->
+    <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+    <div class="queue-backdrop" id="queue-backdrop"></div>
 
   </div>
 

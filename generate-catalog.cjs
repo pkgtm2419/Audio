@@ -77,10 +77,15 @@ function cleanString(str) {
   // Remove smart quotes, hashtags, and empty parentheses
   cleaned = cleaned.replace(/[“”"']/g, '');
   cleaned = cleaned.replace(/\(\s*\)|\[\s*\]|\{\s*\}/g, ' ');
+  // Normalize whitespace and trim first
+  cleaned = cleaned.replace(/\s{2,}/g, ' ').trim();
+  // Clean release year prefixes like '2018 : ', 's 2018 ', '2021 - ', '3 - '
+  cleaned = cleaned.replace(/^(?:s\s*)?(?:19\d\d|20\d\d)\s*[:\-_]?\s*/i, '');
+  cleaned = cleaned.replace(/^\d+\s*-\s*/, '');
   // Remove trailing/leading punctuation, colons, brackets, spaces, dashes
   cleaned = cleaned.replace(/^[#:`\s\-_()[\]{}]+|[#:`\s\-_()[\]{}]+$/g, '');
-  cleaned = cleaned.replace(/\s{2,}/g, ' ');
-  return cleaned.trim();
+  cleaned = cleaned.replace(/\s{2,}/g, ' ').trim();
+  return cleaned;
 }
 
 // Generate deterministic HSL gradient based on string hash
