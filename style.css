@@ -154,6 +154,37 @@ input, select {
   letter-spacing: 1.2px;
 }
 
+.sidebar-close-btn {
+  display: none;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-secondary);
+  font-size: 14px;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  transition: var(--transition-fast);
+}
+.sidebar-close-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--text-primary);
+}
+
+.mobile-brand {
+  display: none;
+  align-items: center;
+}
+.mobile-brand-title {
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .nav-section-label {
   font-size: 11px;
   font-weight: 700;
@@ -789,8 +820,9 @@ input, select {
 /* --- GRID VIEW (Premium Album Art Covers!) --- */
 .track-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 16px;
+  width: 100%;
 }
 
 .song-card {
@@ -804,7 +836,10 @@ input, select {
   cursor: pointer;
   position: relative;
   content-visibility: auto;
-  contain-intrinsic-size: 250px;
+  contain-intrinsic-size: auto 250px;
+  min-width: 0;
+  width: 100%;
+  overflow: hidden;
 }
 
 .song-card:hover {
@@ -935,6 +970,8 @@ input, select {
   flex-direction: column;
   flex: 1;
   overflow: hidden;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .card-title {
@@ -945,6 +982,8 @@ input, select {
   overflow: hidden;
   text-overflow: ellipsis;
   margin-bottom: 3px;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .song-card.playing .card-title {
@@ -958,6 +997,8 @@ input, select {
   overflow: hidden;
   text-overflow: ellipsis;
   margin-bottom: 6px;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .card-footer {
@@ -1916,12 +1957,12 @@ input, select {
     padding: 0 16px;
   }
   .track-grid {
-    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
     gap: 14px;
   }
 }
 
-/* Tablet (Portrait) & Mobile Devices (<= 768px) */
+/* Tablet (Portrait) & Large Mobile (<= 768px) */
 @media (max-width: 768px) {
   .app-shell {
     grid-template-columns: 1fr;
@@ -1943,6 +1984,10 @@ input, select {
     transform: translateX(0);
   }
 
+  .sidebar-close-btn {
+    display: flex;
+  }
+
   .sidebar-backdrop {
     z-index: 72;
   }
@@ -1960,7 +2005,7 @@ input, select {
 
   .main-content {
     grid-column: 1;
-    padding: 0 16px 110px; /* generous bottom padding so cards are never covered by mobile bottom player! */
+    padding: 0 16px calc(115px + env(safe-area-inset-bottom, 0px)); /* ensures no card is hidden behind mobile bottom player */
   }
 
   .sticky-nav-header {
@@ -1982,7 +2027,12 @@ input, select {
     font-size: 20px;
   }
 
-  /* Robust Mobile Bottom Player with FULL controls! */
+  .track-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 12px;
+  }
+
+  /* Robust Mobile Bottom Player with FULL controls */
   .player-bar {
     position: fixed;
     bottom: 0;
@@ -1990,11 +2040,13 @@ input, select {
     right: 0;
     height: auto;
     min-height: 74px;
-    padding: 6px 14px 10px;
+    padding: 6px 14px max(10px, env(safe-area-inset-bottom, 0px));
     grid-template-columns: 1fr auto;
     grid-template-rows: auto auto;
     gap: 6px 12px;
     background: rgba(10, 12, 20, 0.98);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
     z-index: 65;
   }
 
@@ -2029,7 +2081,7 @@ input, select {
     font-size: 10.5px;
   }
 
-  /* Player Controls Right Column (NEVER HIDDEN on mobile!) */
+  /* Player Controls Right Column */
   .player-center {
     grid-column: 2;
     grid-row: 2;
@@ -2040,12 +2092,12 @@ input, select {
     gap: 10px;
   }
   .btn-play-pause {
-    width: 38px;
-    height: 38px;
+    width: 42px;
+    height: 42px;
   }
   .btn-play-pause svg {
-    width: 17px;
-    height: 17px;
+    width: 18px;
+    height: 18px;
   }
   .btn-seek-jump {
     display: none;
@@ -2065,21 +2117,51 @@ input, select {
   }
 }
 
-/* Small Smartphone Screens (<= 480px) */
-@media (max-width: 480px) {
+/* Smartphone Screens (<= 600px) */
+@media (max-width: 600px) {
+  .top-bar {
+    flex-wrap: wrap;
+    gap: 8px 10px;
+    align-items: center;
+  }
+
+  .mobile-menu-toggle {
+    order: 1;
+  }
+
+  .mobile-brand {
+    display: flex;
+    order: 2;
+    margin-right: auto;
+  }
+
   .top-bar-actions {
+    order: 3;
+    margin-left: auto;
     gap: 6px;
   }
 
-  .select-wrapper select {
-    max-width: 110px;
-    font-size: 11.5px;
-    padding: 7px 10px;
+  .search-wrapper {
+    order: 4;
+    flex: 1 1 100%;
+    width: 100%;
+    margin-top: 2px;
   }
 
-  /* 2 Clean Cards Per Row on Small Phones! */
+  .select-wrapper select {
+    max-width: 105px;
+    font-size: 11px;
+    padding: 6px 8px;
+  }
+
+  .view-switcher .btn-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  /* 2 Clean Proportional Cards Per Row on Phones with minmax(0, 1fr) */
   .track-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
   }
 
@@ -2096,18 +2178,43 @@ input, select {
 
   .hero-banner {
     padding: 16px;
-    min-height: 140px;
+    min-height: 135px;
   }
 
   .hero-title {
-    font-size: 18px;
+    font-size: 17px;
   }
   .hero-artist {
-    font-size: 12.5px;
-    margin-bottom: 12px;
+    font-size: 12px;
+    margin-bottom: 10px;
   }
   .btn-hero-play {
-    padding: 9px 16px;
+    padding: 8px 14px;
     font-size: 12px;
+  }
+}
+
+/* Extra Small Smartphone Screens (<= 360px) */
+@media (max-width: 360px) {
+  .track-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .song-card {
+    padding: 8px;
+  }
+
+  .card-title {
+    font-size: 11.5px;
+  }
+  .card-artist {
+    font-size: 10px;
+  }
+
+  .select-wrapper select {
+    max-width: 85px;
+    font-size: 10px;
+    padding: 5px 6px;
   }
 }

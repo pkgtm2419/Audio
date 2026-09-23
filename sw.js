@@ -4,7 +4,7 @@
  * and bypasses HTTP Range requests to preserve HTML5 audio streaming.
  */
 
-const CACHE_NAME = 'paudio-v1';
+const CACHE_NAME = 'paudio-v2';
 
 // Application shell assets to precache on install
 const PRECACHE_ASSETS = [
