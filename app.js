@@ -136,7 +136,11 @@
     sidebar: document.getElementById('sidebar'),
     btnMobileMenu: document.getElementById('btn-mobile-menu'),
     sidebarBackdrop: document.getElementById('sidebar-backdrop'),
-    queueBackdrop: document.getElementById('queue-backdrop')
+    queueBackdrop: document.getElementById('queue-backdrop'),
+
+    // PWA Install
+    btnInstallApp: document.getElementById('btn-install-app'),
+    btnInstallAppTop: document.getElementById('btn-install-app-top')
   };
 
   // --- Web Audio API Setup ---
@@ -1295,7 +1299,67 @@
     dom.trackContainer.className = 'track-container track-grid';
   }
 
+  // --- Progressive Web App (PWA) & Service Worker ---
+  let deferredInstallPrompt = null;
+
+  function registerServiceWorker() {
+    if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js', { scope: './' })
+          .then((reg) => {
+            console.log('[PWA] Service Worker registered successfully with scope:', reg.scope);
+          })
+          .catch((err) => {
+            console.warn('[PWA] Service Worker registration failed:', err);
+          });
+      });
+    }
+  }
+
+  function initPWAInstall() {
+    // If already running in standalone mode (already installed), do not show prompts
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+    if (isStandalone) {
+      console.log('[PWA] App is running in standalone mode.');
+      return;
+    }
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      // Prevent default mini-infobar on mobile
+      e.preventDefault();
+      deferredInstallPrompt = e;
+
+      // Reveal install CTA buttons
+      if (dom.btnInstallApp) dom.btnInstallApp.classList.remove('hidden');
+      if (dom.btnInstallAppTop) dom.btnInstallAppTop.classList.remove('hidden');
+    });
+
+    async function triggerInstall() {
+      if (!deferredInstallPrompt) return;
+      deferredInstallPrompt.prompt();
+      const { outcome } = await deferredInstallPrompt.userChoice;
+      console.log(`[PWA] Install prompt outcome: ${outcome}`);
+      if (outcome === 'accepted') {
+        if (dom.btnInstallApp) dom.btnInstallApp.classList.add('hidden');
+        if (dom.btnInstallAppTop) dom.btnInstallAppTop.classList.add('hidden');
+      }
+      deferredInstallPrompt = null;
+    }
+
+    if (dom.btnInstallApp) dom.btnInstallApp.addEventListener('click', triggerInstall);
+    if (dom.btnInstallAppTop) dom.btnInstallAppTop.addEventListener('click', triggerInstall);
+
+    window.addEventListener('appinstalled', () => {
+      console.log('[PWA] AudioVault was successfully installed!');
+      deferredInstallPrompt = null;
+      if (dom.btnInstallApp) dom.btnInstallApp.classList.add('hidden');
+      if (dom.btnInstallAppTop) dom.btnInstallAppTop.classList.add('hidden');
+    });
+  }
+
   // Boot
   loadCatalog();
+  registerServiceWorker();
+  initPWAInstall();
 
 })();

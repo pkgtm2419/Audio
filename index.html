@@ -5,7 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AudioVault - Web Music Player</title>
   <meta name="description" content="A modern, high-performance web music player for your audio repository on GitHub Pages.">
-  <meta name="theme-color" content="#0a0c14">
+  <meta name="theme-color" content="#10b981">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="AudioVault">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="alternate icon" type="image/png" href="icons/icon-192.png">
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -101,6 +109,16 @@
           <span>Shortcuts</span>
           <kbd>?</kbd>
         </button>
+
+        <!-- Install PWA App Button -->
+        <button class="btn-install-app hidden" id="btn-install-app" title="Install AudioVault App">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          <span>Install App</span>
+        </button>
       </div>
     </aside>
 
@@ -129,6 +147,15 @@
           </div>
 
           <div class="top-bar-actions">
+            <!-- PWA Install Button (Header) -->
+            <button class="btn-icon btn-install-top hidden" id="btn-install-app-top" title="Install AudioVault App" aria-label="Install App">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+            </button>
+
             <!-- Sort Dropdown -->
             <div class="select-wrapper">
               <select id="sort-select" aria-label="Sort tracks">
