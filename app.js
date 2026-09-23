@@ -1,5 +1,5 @@
 /**
- * AudioVault Web Music Player Engine
+ * PAudio (Personal Audio) Web Music Player Engine
  * High-performance, zero-dependency audio player with Web Audio API visualizer,
  * MediaSession API, virtualized infinite scrolling, and offline fallback support.
  */
@@ -1207,7 +1207,7 @@
       navigator.mediaSession.metadata = new MediaMetadata({
         title: song.title,
         artist: song.artist,
-        album: song.album || 'Audio Vault',
+        album: song.album || 'Personal Audio',
         artwork: [
           { src: generateCoverDataUri(song, 128), sizes: '128x128', type: 'image/png' },
           { src: generateCoverDataUri(song, 512), sizes: '512x512', type: 'image/png' }
@@ -1350,7 +1350,7 @@
     if (dom.btnInstallAppTop) dom.btnInstallAppTop.addEventListener('click', triggerInstall);
 
     window.addEventListener('appinstalled', () => {
-      console.log('[PWA] AudioVault was successfully installed!');
+      console.log('[PWA] PAudio was successfully installed!');
       deferredInstallPrompt = null;
       if (dom.btnInstallApp) dom.btnInstallApp.classList.add('hidden');
       if (dom.btnInstallAppTop) dom.btnInstallAppTop.classList.add('hidden');

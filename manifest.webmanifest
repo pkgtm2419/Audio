@@ -1,7 +1,7 @@
 {
-  "name": "AudioVault - Web Music Player",
-  "short_name": "AudioVault",
-  "description": "High-performance web music player streaming your audio collection directly from GitHub Pages",
+  "name": "PAudio - Personal Audio",
+  "short_name": "PAudio",
+  "description": "PAudio (Personal Audio) - High-performance music player streaming your audio collection directly from GitHub Pages",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

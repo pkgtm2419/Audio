@@ -300,7 +300,7 @@ function generateCatalog(rootDir = '.') {
     }
 
     if (!cleanArtist) {
-      cleanArtist = 'Audio Vault';
+      cleanArtist = 'PAudio';
     }
 
     // Generate unique ID from relative path
@@ -319,7 +319,7 @@ function generateCatalog(rootDir = '.') {
       url,
       title: cleanTitle,
       artist: cleanArtist,
-      album: cleanString(id3.TALB) || 'Audio Vault',
+      album: cleanString(id3.TALB) || 'Personal Audio',
       sizeBytes: stat.size,
       sizeFormatted: (stat.size / (1024 * 1024)).toFixed(1) + ' MB',
       extension: ext.replace('.', '').toUpperCase(),

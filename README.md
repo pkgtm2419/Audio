@@ -1,8 +1,8 @@
-# 🎵 AudioVault - Web Music Player
+# 🎵 PAudio - Personal Audio Music Player
 
-A modern, high-performance web music player designed to stream audio files directly from this repository via **GitHub Pages** or run offline on your local machine.
+A modern, high-performance web music player designed to stream audio files directly from this repository via **GitHub Pages** or run offline on your local machine as an installable Progressive Web App (PWA).
 
-![AudioVault Preview](https://img.shields.io/badge/AudioVault-Music%20Player-10b981?style=for-the-badge&logo=music)
+![PAudio Preview](https://img.shields.io/badge/PAudio-Personal%20Audio-10b981?style=for-the-badge&logo=music)
 ![Total Tracks](https://img.shields.io/badge/Tracks-919-06b6d4?style=for-the-badge)
 ![Storage](https://img.shields.io/badge/Storage-7.2%20GB-8b5cf6?style=for-the-badge)
 

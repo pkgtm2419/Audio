@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AudioVault - Web Music Player</title>
-  <meta name="description" content="A modern, high-performance web music player for your audio repository on GitHub Pages.">
+  <title>PAudio - Personal Audio Music Player</title>
+  <meta name="description" content="PAudio (Personal Audio) - A modern, high-performance web music player for your audio collection on GitHub Pages.">
   <meta name="theme-color" content="#10b981">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="AudioVault">
+  <meta name="apple-mobile-web-app-title" content="PAudio">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
   <link rel="apple-touch-icon" href="icons/icon-192.png">
@@ -27,13 +27,16 @@
     <aside class="sidebar" id="sidebar">
       <div class="brand">
         <div class="brand-icon">
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="5" y="4" width="5.5" height="24" rx="2.75" fill="currentColor"/>
+            <path d="M7.75 4h10c5.52 0 10 4.48 10 10s-4.48 10-10 10h-10" stroke="currentColor" stroke-width="5.5" stroke-linecap="round"/>
+            <circle cx="17.75" cy="14" r="3.5" fill="#090d16"/>
+            <polygon points="16.5,12 16.5,16 20,14" fill="currentColor"/>
           </svg>
         </div>
         <div class="brand-text">
-          <span class="brand-title">AudioVault</span>
-          <span class="brand-subtitle">Music Player</span>
+          <span class="brand-title">PAudio</span>
+          <span class="brand-subtitle">Personal Audio</span>
         </div>
       </div>
 
@@ -111,7 +114,7 @@
         </button>
 
         <!-- Install PWA App Button -->
-        <button class="btn-install-app hidden" id="btn-install-app" title="Install AudioVault App">
+        <button class="btn-install-app hidden" id="btn-install-app" title="Install PAudio App">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
             <polyline points="7 10 12 15 17 10"></polyline>
@@ -148,7 +151,7 @@
 
           <div class="top-bar-actions">
             <!-- PWA Install Button (Header) -->
-            <button class="btn-icon btn-install-top hidden" id="btn-install-app-top" title="Install AudioVault App" aria-label="Install App">
+            <button class="btn-icon btn-install-top hidden" id="btn-install-app-top" title="Install PAudio App" aria-label="Install PAudio App">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                 <polyline points="7 10 12 15 17 10"></polyline>

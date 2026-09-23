@@ -1,10 +1,10 @@
 /**
- * AudioVault Service Worker
+ * PAudio (Personal Audio) Service Worker
  * Provides offline application shell, stale-while-revalidate caching,
  * and bypasses HTTP Range requests to preserve HTML5 audio streaming.
  */
 
-const CACHE_NAME = 'audiovault-v1';
+const CACHE_NAME = 'paudio-v1';
 
 // Application shell assets to precache on install
 const PRECACHE_ASSETS = [
@@ -44,7 +44,7 @@ self.addEventListener('activate', (event) => {
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames
-          .filter((name) => name.startsWith('audiovault-') && name !== CACHE_NAME)
+          .filter((name) => (name.startsWith('paudio-') || name.startsWith('audiovault-')) && name !== CACHE_NAME)
           .map((name) => caches.delete(name))
       );
     }).then(() => self.clients.claim())
