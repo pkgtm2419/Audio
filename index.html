@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AudioVault - Web Music Player</title>
+  <meta name="description" content="A modern, high-performance web music player for your audio repository on GitHub Pages.">
+  <meta name="theme-color" content="#0a0c14">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Root App Shell -->
+  <div class="app-shell" id="app">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">AudioVault</span>
+          <span class="brand-subtitle">Music Player</span>
+        </div>
+      </div>
+
+      <nav class="nav-menu">
+        <div class="nav-section-label">MENU</div>
+        <button class="nav-item active" data-view="all" id="nav-all">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 18V5l12-2v13"></path>
+            <circle cx="6" cy="18" r="3"></circle>
+            <circle cx="18" cy="16" r="3"></circle>
+          </svg>
+          <span>All Tracks</span>
+          <span class="nav-badge" id="badge-all-count">0</span>
+        </button>
+
+        <button class="nav-item" data-view="favorites" id="nav-favorites">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+          </svg>
+          <span>Liked Songs</span>
+          <span class="nav-badge" id="badge-favorites-count">0</span>
+        </button>
+
+        <button class="nav-item" data-view="recent" id="nav-recent">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          <span>Recently Played</span>
+        </button>
+
+        <button class="nav-item" data-view="artists" id="nav-artists">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          <span>Top Artists</span>
+        </button>
+
+        <div class="nav-section-label" style="margin-top: 24px;">
+          <span>PLAYLISTS</span>
+          <button class="btn-icon-subtle" id="btn-create-playlist-trigger" title="Create Playlist">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          </button>
+        </div>
+
+        <div class="playlists-list" id="playlists-nav-list">
+          <!-- Dynamic custom playlists will appear here -->
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="library-stats">
+          <div class="stat-row">
+            <span class="stat-label">Library Size</span>
+            <span class="stat-val" id="stats-lib-size">7.2 GB</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Total Audio</span>
+            <span class="stat-val" id="stats-track-count">919 Tracks</span>
+          </div>
+        </div>
+
+        <button class="btn-shortcuts" id="btn-shortcuts-dialog">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+            <line x1="6" y1="8" x2="6.01" y2="8"></line>
+            <line x1="10" y1="8" x2="10.01" y2="8"></line>
+            <line x1="14" y1="8" x2="14.01" y2="8"></line>
+            <line x1="18" y1="8" x2="18.01" y2="8"></line>
+            <line x1="8" y1="12" x2="16" y2="12"></line>
+          </svg>
+          <span>Shortcuts</span>
+          <kbd>?</kbd>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Player Stage -->
+    <main class="main-content" id="main-content">
+      
+      <!-- Top Action Bar -->
+      <header class="top-bar">
+        <button class="btn-icon mobile-menu-toggle" id="btn-mobile-menu" aria-label="Toggle Menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+
+        <div class="search-wrapper">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="search-input" placeholder="Search 919+ songs, artists, or genres..." autocomplete="off">
+          <button class="search-clear hidden" id="search-clear" aria-label="Clear Search">✕</button>
+          <kbd class="search-kbd">/</kbd>
+        </div>
+
+        <div class="top-bar-actions">
+          <!-- Sort Dropdown -->
+          <div class="select-wrapper">
+            <select id="sort-select" aria-label="Sort tracks">
+              <option value="default">Sort: Default (A-Z)</option>
+              <option value="title-desc">Title (Z-A)</option>
+              <option value="artist-asc">Artist (A-Z)</option>
+              <option value="size-desc">Size (Largest)</option>
+              <option value="size-asc">Size (Smallest)</option>
+              <option value="random">Shuffle Order</option>
+            </select>
+          </div>
+
+          <!-- View Switcher -->
+          <div class="view-switcher">
+            <button class="btn-icon active" id="btn-view-grid" title="Grid View">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+              </svg>
+            </button>
+            <button class="btn-icon" id="btn-view-list" title="List View">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="8" y1="6" x2="21" y2="6"></line>
+                <line x1="8" y1="12" x2="21" y2="12"></line>
+                <line x1="8" y1="18" x2="21" y2="18"></line>
+                <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                <line x1="3" y1="18" x2="3.01" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Category Filter Chips -->
+      <section class="filter-chips-bar" id="category-chips">
+        <button class="filter-chip active" data-category="all">All Tracks</button>
+        <button class="filter-chip" data-category="Punjabi">Punjabi</button>
+        <button class="filter-chip" data-category="Bollywood">Bollywood</button>
+        <button class="filter-chip" data-category="Romantic">Romantic</button>
+        <button class="filter-chip" data-category="Sufi">Sufi & Qawwali</button>
+        <button class="filter-chip" data-category="Devotional">Devotional</button>
+        <button class="filter-chip" data-category="Rap">Rap & Hip-Hop</button>
+        <button class="filter-chip" data-category="Lo-Fi">Lo-Fi & Acoustic</button>
+        <button class="filter-chip" data-category="Poetry">Poetry</button>
+      </section>
+
+      <!-- Dynamic Hero Feature Card (Current Playing / Featured) -->
+      <section class="hero-banner" id="hero-banner">
+        <div class="hero-backdrop" id="hero-backdrop"></div>
+        <canvas class="hero-visualizer-canvas" id="hero-visualizer"></canvas>
+        <div class="hero-content">
+          <div class="hero-badge">NOW STREAMING</div>
+          <h1 class="hero-title" id="hero-title">Select a song to play</h1>
+          <p class="hero-artist" id="hero-artist">919 tracks ready from Audio repository</p>
+          <div class="hero-controls">
+            <button class="btn-hero-play" id="hero-play-btn">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+              <span>Play Track</span>
+            </button>
+            <button class="btn-hero-fav" id="hero-fav-btn" title="Like track">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+              </svg>
+            </button>
+            <div class="hero-meta" id="hero-meta">
+              <span class="hero-tag" id="hero-tag">MP3</span>
+              <span class="hero-size" id="hero-size">0.0 MB</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Track List Section -->
+      <section class="tracks-section">
+        <div class="section-header">
+          <div class="section-title-group">
+            <h2 class="section-title" id="current-view-title">All Tracks</h2>
+            <span class="section-count" id="current-view-count">919 songs</span>
+          </div>
+          <div class="section-quick-actions">
+            <button class="btn-quick-shuffle" id="btn-quick-shuffle">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="16 3 21 3 21 8"></polyline>
+                <line x1="4" y1="20" x2="21" y2="3"></line>
+                <polyline points="21 16 21 21 16 21"></polyline>
+                <line x1="15" y1="15" x2="21" y2="21"></line>
+                <line x1="4" y1="4" x2="9" y2="9"></line>
+              </svg>
+              <span>Shuffle Play</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Render Target for Tracks (Grid or List) -->
+        <div class="track-container track-grid" id="track-container">
+          <!-- Dynamically populated -->
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state hidden" id="empty-state">
+          <div class="empty-icon">🔍</div>
+          <h3>No matching tracks found</h3>
+          <p>Try searching for a different song name, artist, or clearing your filter.</p>
+          <button class="btn-accent" id="btn-clear-search">Reset Search</button>
+        </div>
+
+        <!-- Sentinel for infinite chunk rendering -->
+        <div id="scroll-sentinel" style="height: 40px;"></div>
+      </section>
+    </main>
+
+    <!-- Queue Drawer Panel -->
+    <aside class="queue-drawer" id="queue-drawer">
+      <div class="queue-header">
+        <div class="queue-title-group">
+          <h3>Play Queue</h3>
+          <span class="queue-count" id="queue-count-badge">0 tracks</span>
+        </div>
+        <div class="queue-actions">
+          <button class="btn-text-subtle" id="btn-clear-queue">Clear</button>
+          <button class="btn-icon" id="btn-close-queue" title="Close Queue">✕</button>
+        </div>
+      </div>
+      <div class="queue-content" id="queue-list">
+        <!-- Queue items injected here -->
+      </div>
+    </aside>
+
+    <!-- Persistent Bottom Audio Player Bar -->
+    <footer class="player-bar" id="player-bar">
+      <!-- Left: Track Details -->
+      <div class="player-track-info">
+        <div class="player-art" id="player-art">
+          <div class="art-placeholder" id="player-art-inner">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+          </div>
+          <div class="playing-bars" id="mini-bars">
+            <span></span><span></span><span></span><span></span>
+          </div>
+        </div>
+        <div class="player-text">
+          <div class="player-title" id="player-title">No track playing</div>
+          <div class="player-artist" id="player-artist">Select a song above</div>
+        </div>
+        <button class="btn-icon-subtle btn-player-fav" id="btn-player-fav" title="Like Song">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Center: Playback Controls & Scrubber -->
+      <div class="player-center">
+        <div class="player-controls">
+          <button class="btn-control" id="btn-shuffle" title="Shuffle (S)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="16 3 21 3 21 8"></polyline>
+              <line x1="4" y1="20" x2="21" y2="3"></line>
+              <polyline points="21 16 21 21 16 21"></polyline>
+              <line x1="15" y1="15" x2="21" y2="21"></line>
+              <line x1="4" y1="4" x2="9" y2="9"></line>
+            </svg>
+          </button>
+
+          <button class="btn-control" id="btn-prev" title="Previous (Shift + ←)">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="19 20 9 12 19 4 19 20"></polygon>
+              <line x1="5" y1="19" x2="5" y2="5" stroke="currentColor" stroke-width="2"></line>
+            </svg>
+          </button>
+
+          <button class="btn-control btn-seek-jump" id="btn-rewind-10" title="Rewind 10s">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+              <polyline points="3 3 3 8 8 8"></polyline>
+              <text x="12" y="16" font-size="7" font-weight="bold" fill="currentColor" text-anchor="middle">10</text>
+            </svg>
+          </button>
+
+          <button class="btn-play-pause" id="btn-play-pause" title="Play/Pause (Space)">
+            <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            <svg class="icon-pause hidden" viewBox="0 0 24 24" fill="currentColor">
+              <rect x="6" y="4" width="4" height="16"></rect>
+              <rect x="14" y="4" width="4" height="16"></rect>
+            </svg>
+          </button>
+
+          <button class="btn-control btn-seek-jump" id="btn-forward-10" title="Forward 10s">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 12a9 9 0 1 1-9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
+              <polyline points="21 3 21 8 16 8"></polyline>
+              <text x="12" y="16" font-size="7" font-weight="bold" fill="currentColor" text-anchor="middle">10</text>
+            </svg>
+          </button>
+
+          <button class="btn-control" id="btn-next" title="Next (Shift + →)">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="5 4 15 12 5 20 5 4"></polygon>
+              <line x1="19" y1="5" x2="19" y2="19" stroke="currentColor" stroke-width="2"></line>
+            </svg>
+          </button>
+
+          <button class="btn-control" id="btn-repeat" title="Repeat (R)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="17 1 21 5 17 9"></polyline>
+              <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
+              <polyline points="7 23 3 19 7 15"></polyline>
+              <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
+            </svg>
+            <span class="repeat-one-indicator hidden">1</span>
+          </button>
+        </div>
+
+        <div class="player-progress-bar">
+          <span class="time-stamp" id="time-current">0:00</span>
+          <div class="seek-slider-container" id="seek-container">
+            <div class="seek-buffer" id="seek-buffer"></div>
+            <div class="seek-fill" id="seek-fill"></div>
+            <input type="range" class="seek-slider" id="seek-slider" min="0" max="100" value="0" step="0.1" aria-label="Seek track">
+            <div class="seek-tooltip hidden" id="seek-tooltip">0:00</div>
+          </div>
+          <span class="time-stamp" id="time-total">0:00</span>
+        </div>
+      </div>
+
+      <!-- Right: Extra Controls & Volume -->
+      <div class="player-extras">
+        <!-- Speed Selector -->
+        <div class="speed-control">
+          <button class="btn-speed" id="btn-speed" title="Playback Speed">1.0x</button>
+          <div class="speed-menu hidden" id="speed-menu">
+            <button data-speed="0.75">0.75x</button>
+            <button data-speed="1.0" class="active">1.0x</button>
+            <button data-speed="1.25">1.25x</button>
+            <button data-speed="1.5">1.5x</button>
+            <button data-speed="2.0">2.0x</button>
+          </div>
+        </div>
+
+        <!-- Queue Toggle -->
+        <button class="btn-icon-subtle" id="btn-toggle-queue" title="Play Queue">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="8" y1="6" x2="21" y2="6"></line>
+            <line x1="8" y1="12" x2="21" y2="12"></line>
+            <line x1="8" y1="18" x2="21" y2="18"></line>
+            <line x1="3" y1="6" x2="3.01" y2="6"></line>
+            <line x1="3" y1="12" x2="3.01" y2="12"></line>
+            <line x1="3" y1="18" x2="3.01" y2="18"></line>
+          </svg>
+          <span class="badge-dot hidden" id="queue-dot"></span>
+        </button>
+
+        <!-- Volume -->
+        <div class="volume-wrapper">
+          <button class="btn-icon-subtle" id="btn-volume-mute" title="Mute (M)">
+            <svg class="icon-vol-high" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            </svg>
+            <svg class="icon-vol-mute hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <line x1="23" y1="9" x2="17" y2="15"></line>
+              <line x1="17" y1="9" x2="23" y2="15"></line>
+            </svg>
+          </button>
+          <input type="range" class="volume-slider" id="volume-slider" min="0" max="1" step="0.01" value="0.8" aria-label="Volume">
+        </div>
+
+        <!-- Fullscreen Ambient View -->
+        <button class="btn-icon-subtle" id="btn-fullscreen" title="Fullscreen Ambient (F)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <polyline points="9 21 3 21 3 15"></polyline>
+            <line x1="21" y1="3" x2="14" y2="10"></line>
+            <line x1="3" y1="21" x2="10" y2="14"></line>
+          </svg>
+        </button>
+      </div>
+    </footer>
+
+    <!-- Fullscreen Ambient Player Modal -->
+    <div class="fullscreen-modal hidden" id="fullscreen-modal">
+      <div class="fs-backdrop" id="fs-backdrop"></div>
+      <canvas class="fs-visualizer-canvas" id="fs-visualizer"></canvas>
+      <button class="fs-close" id="btn-close-fs" title="Exit Fullscreen (Esc)">✕</button>
+
+      <div class="fs-body">
+        <div class="fs-vinyl-stage">
+          <div class="vinyl-disc" id="vinyl-disc">
+            <div class="vinyl-grooves"></div>
+            <div class="vinyl-center-art" id="vinyl-center-art">
+              <span id="vinyl-art-letter">🎵</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="fs-details">
+          <div class="fs-badge">PLAYING FROM AUDIO REPOSITORY</div>
+          <h1 class="fs-title" id="fs-title">Song Title</h1>
+          <h2 class="fs-artist" id="fs-artist">Artist Name</h2>
+
+          <div class="fs-scrubber">
+            <span id="fs-time-current">0:00</span>
+            <input type="range" class="seek-slider" id="fs-seek-slider" min="0" max="100" value="0" step="0.1">
+            <span id="fs-time-total">0:00</span>
+          </div>
+
+          <div class="fs-controls">
+            <button class="btn-control" id="fs-btn-prev">
+              <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="19 20 9 12 19 4 19 20"></polygon><line x1="5" y1="19" x2="5" y2="5" stroke="currentColor" stroke-width="2"></line></svg>
+            </button>
+            <button class="btn-play-pause btn-play-large" id="fs-btn-play">
+              <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              <svg class="icon-pause hidden" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+            </button>
+            <button class="btn-control" id="fs-btn-next">
+              <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="5" x2="19" y2="19" stroke="currentColor" stroke-width="2"></line></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Create Playlist Dialog -->
+    <dialog class="modal-dialog" id="dialog-create-playlist">
+      <form method="dialog" id="form-create-playlist">
+        <h3>Create New Playlist</h3>
+        <p>Enter a name for your custom playlist:</p>
+        <input type="text" id="playlist-name-input" placeholder="e.g. Late Night Vibes" required maxlength="40">
+        <div class="modal-actions">
+          <button type="button" class="btn-text-subtle" id="btn-cancel-playlist">Cancel</button>
+          <button type="submit" class="btn-accent">Create Playlist</button>
+        </div>
+      </form>
+    </dialog>
+
+    <!-- Keyboard Shortcuts Modal -->
+    <dialog class="modal-dialog shortcuts-dialog" id="dialog-shortcuts">
+      <div class="modal-header">
+        <h3>Keyboard Shortcuts</h3>
+        <button class="btn-icon-subtle" id="btn-close-shortcuts">✕</button>
+      </div>
+      <div class="shortcuts-grid">
+        <div class="shortcut-row"><kbd>Space</kbd><span>Play / Pause</span></div>
+        <div class="shortcut-row"><kbd>←</kbd> / <kbd>→</kbd><span>Seek Backward / Forward 5s</span></div>
+        <div class="shortcut-row"><kbd>Shift</kbd> + <kbd>←</kbd><span>Previous Track</span></div>
+        <div class="shortcut-row"><kbd>Shift</kbd> + <kbd>→</kbd><span>Next Track</span></div>
+        <div class="shortcut-row"><kbd>↑</kbd> / <kbd>↓</kbd><span>Volume Up / Down 5%</span></div>
+        <div class="shortcut-row"><kbd>M</kbd><span>Mute / Unmute</span></div>
+        <div class="shortcut-row"><kbd>S</kbd><span>Toggle Shuffle</span></div>
+        <div class="shortcut-row"><kbd>R</kbd><span>Toggle Repeat Mode</span></div>
+        <div class="shortcut-row"><kbd>F</kbd><span>Toggle Fullscreen Ambient Mode</span></div>
+        <div class="shortcut-row"><kbd>/</kbd><span>Focus Search Bar</span></div>
+        <div class="shortcut-row"><kbd>Esc</kbd><span>Close Modals / Exit Fullscreen</span></div>
+      </div>
+    </dialog>
+
+    <!-- Hidden Native Audio Engine -->
+    <audio id="native-audio" preload="metadata" crossorigin="anonymous"></audio>
+
+  </div>
+
+  <!-- Load pre-generated catalog (allows double-click file:/// local running without CORS) -->
+  <script src="songs.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
